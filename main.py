@@ -46,6 +46,7 @@ def move(d: number):
             motobit.set_motor_speed(Motor.RIGHT, MotorDirection.REVERSE, 64)
             pause(d/5)
             e= e+d/5
+            motobit.enable(MotorPower.OFF)
     
         
     
