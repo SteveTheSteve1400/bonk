@@ -1,3 +1,6 @@
+#make sure you use the pull request code, not this. Will merge soon. Ask me in class on how to make it correct, cause you do need some manual input
+
+
 def turnL(a: number):
     motobit.enable(MotorPower.ON)
     motobit.set_motor_speed(Motor.LEFT, MotorDirection.REVERSE, 40)
