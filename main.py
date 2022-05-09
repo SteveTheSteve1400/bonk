@@ -1,3 +1,4 @@
+e=0
 def turnL(a: number):
     motobit.enable(MotorPower.ON)
     motobit.set_motor_speed(Motor.LEFT, MotorDirection.REVERSE, 40)
@@ -10,8 +11,7 @@ def on_button_pressed_a():
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def on_button_pressed_ab():
-    global f
-    f = input.acceleration(Dimension.X)
+    e = input.compass_heading()
     move(7000)
     turnR(590)
     move(4700)
@@ -22,9 +22,8 @@ input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 def move(d: number):
     c = 0
-    e = 0
     while e!=d:
-        number2 = input.acceleration(Dimension.X)
+        number2 = input.compass_heading()
         if number2 <= c:
             while(abs(c - number2) >= 10):
                 motobit.enable(MotorPower.OFF)
