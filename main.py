@@ -1,6 +1,5 @@
-#make sure you use the pull request code, not this. Will merge soon. Ask me in class on how to make it correct, cause you do need some manual input
 
-
+input.calibrate()
 def turnL(a: number):
     motobit.enable(MotorPower.ON)
     motobit.set_motor_speed(Motor.LEFT, MotorDirection.REVERSE, 40)
@@ -13,8 +12,7 @@ def on_button_pressed_a():
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def on_button_pressed_ab():
-    global f
-    f = input.acceleration(Dimension.X)
+    
     move(7000)
     turnR(590)
     move(4700)
@@ -24,26 +22,26 @@ def on_button_pressed_ab():
 input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 def move(d: number):
-    c = 0
-    e = 0
+    f = input.compass_heading()
+    e=0
     while e!=d:
-        number2 = input.acceleration(Dimension.X)
-        if number2 <= c:
-            while(abs(c - number2) >= 10):
+        number2 = input.compass_heading()
+        if number2 <= f and abs(f - number2) >= 20:
+            while(abs(f - number2) >= 20):
                 motobit.enable(MotorPower.OFF)
                 motobit.enable(MotorPower.ON)
                 motobit.set_motor_speed(Motor.RIGHT, MotorDirection.FORWARD, 5)
-                if abs(c - number2) >= 10:
+                if abs(f - number2) <= 5:
                     break
-                    motobit.enable(MotorPower.ON)
-        elif number2 >= c:
-            while(abs(c - number2) >= 10):
+                    motobit.enable(MotorPower.OFF)
+        elif number2 >= f and abs(f - number2) >= 20:
+            while(abs(f - number2) >= 10):
                 motobit.enable(MotorPower.OFF)
                 motobit.enable(MotorPower.ON)
                 motobit.set_motor_speed(Motor.RIGHT, MotorDirection.REVERSE, 5)
-                if abs(c - number2) >= 10:
+                if abs(f - number2)<= 10:
                     break
-                    motobit.enable(MotorPower.ON)
+                    motobit.enable(MotorPower.OFF)
         else:
             motobit.set_motor_speed(Motor.LEFT, MotorDirection.FORWARD, 64)
             motobit.set_motor_speed(Motor.RIGHT, MotorDirection.REVERSE, 64)
